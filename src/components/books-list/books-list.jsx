@@ -6,6 +6,8 @@ import {booksLoaded} from '../../actions';
 
 import BooksListItem from './books-list-item';
 
+import {compose} from '../../utils';
+
 const BooksList = ({books, bookstoreService, booksLoaded}) => {
   useEffect(() => {
     const books = bookstoreService.getBooks();
@@ -28,4 +30,7 @@ const BooksList = ({books, bookstoreService, booksLoaded}) => {
 const mapStateToProps = ({books}) => ({books});
 const mapDispatchToProps = {booksLoaded};
 
-export default withBookStoreService()(connect(mapStateToProps, mapDispatchToProps)(BooksList));
+export default compose(
+  withBookStoreService(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(BooksList);
