@@ -1,0 +1,17 @@
+.cart-table {
+  background: white;
+}
+
+.cart-table .table {
+  margin-bottom: 0;
+}
+
+.cart-table__actions {
+  width: 120px;
+}
+
+.cart-table__total {
+  padding: 16px;
+  text-align: right;
+  border-top: 1px solid #dee2e6;
+}

@@ -1,0 +1,18 @@
+.header-cart {
+  display: flex;
+  align-items: center;
+}
+
+.header-cart__icon {
+  margin-right: 8px;
+  font-size: 20px;
+  color: #007bff;
+}
+
+.header-cart__quantity {
+  margin-right: 4px;
+}
+
+.header-cart__amount {
+  font-weight: bold;
+}
