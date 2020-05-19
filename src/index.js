@@ -10,6 +10,8 @@ import {BookstoreServiceProvider} from './components/bookstore-service-context';
 
 import store from './store';
 
+import './assets/styles';
+
 const bookstoreService = new BookstoreService();
 const root = document.getElementById('root');
 

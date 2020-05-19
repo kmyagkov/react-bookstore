@@ -1,0 +1,8 @@
+.books-list-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.books-list-item__meta {
+  padding: 16px 0;
+}
