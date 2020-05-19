@@ -4,5 +4,15 @@
 }
 
 .books-list-item__meta {
-  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px;
+}
+
+.books-list-item__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
 }

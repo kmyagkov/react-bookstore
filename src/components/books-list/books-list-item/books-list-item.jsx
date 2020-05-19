@@ -3,7 +3,7 @@ import React from 'react';
 import './books-list-item.css';
 
 const BooksListItem = ({book}) => {
-  const {title, author, image} = book;
+  const {title, author, image, price} = book;
   return (
     <li className="list-group-item books-list-item">
       <div className="row">
@@ -18,6 +18,10 @@ const BooksListItem = ({book}) => {
           <section className="books-list-item__meta">
             <h3>{title}</h3>
             <p>{author}</p>
+            <div className="books-list-item__footer">
+              <p>{price}</p>
+              <button className="btn btn-primary">Add to cart</button>
+            </div>
           </section>
         </div>
       </div>
