@@ -1,25 +1,8 @@
-import React, {useEffect} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 
-import withBookStoreService from '../hoc/withBookstoreService';
-import {booksLoaded, booksRequested} from '../../actions';
-
-import Loader from '../loader';
 import BooksListItem from './books-list-item';
 
-import {compose} from '../../utils';
-
-const BooksList = ({books, bookstoreService, booksLoaded, booksRequested, loading}) => {
-  useEffect(() => {
-    booksRequested();
-    bookstoreService.getBooks()
-      .then(books => booksLoaded(books));
-  }, []);
-
-  if (loading) {
-    return <Loader/>
-  }
-
+const BooksList = ({books}) => {
   return (
     <ul className="list-group">
       {
@@ -33,10 +16,4 @@ const BooksList = ({books, bookstoreService, booksLoaded, booksRequested, loadin
   );
 };
 
-const mapStateToProps = ({books, loading}) => ({books, loading});
-const mapDispatchToProps = {booksLoaded, booksRequested};
-
-export default compose(
-  withBookStoreService(),
-  connect(mapStateToProps, mapDispatchToProps)
-)(BooksList);
+export default BooksList;
