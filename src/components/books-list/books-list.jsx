@@ -2,15 +2,16 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
 import withBookStoreService from '../hoc/withBookstoreService';
-import {booksLoaded} from '../../actions';
+import {booksLoaded, booksRequested} from '../../actions';
 
 import Loader from '../loader';
 import BooksListItem from './books-list-item';
 
 import {compose} from '../../utils';
 
-const BooksList = ({books, bookstoreService, booksLoaded, loading}) => {
+const BooksList = ({books, bookstoreService, booksLoaded, booksRequested, loading}) => {
   useEffect(() => {
+    booksRequested();
     bookstoreService.getBooks()
       .then(books => booksLoaded(books));
   }, []);
@@ -33,7 +34,7 @@ const BooksList = ({books, bookstoreService, booksLoaded, loading}) => {
 };
 
 const mapStateToProps = ({books, loading}) => ({books, loading});
-const mapDispatchToProps = {booksLoaded};
+const mapDispatchToProps = {booksLoaded, booksRequested};
 
 export default compose(
   withBookStoreService(),
