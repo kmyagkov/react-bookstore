@@ -4,15 +4,20 @@ import {connect} from 'react-redux';
 import withBookStoreService from '../hoc/withBookstoreService';
 import {booksLoaded} from '../../actions';
 
+import Loader from '../loader';
 import BooksListItem from './books-list-item';
 
 import {compose} from '../../utils';
 
-const BooksList = ({books, bookstoreService, booksLoaded}) => {
+const BooksList = ({books, bookstoreService, booksLoaded, loading}) => {
   useEffect(() => {
-    const books = bookstoreService.getBooks();
-    booksLoaded(books);
+    bookstoreService.getBooks()
+      .then(books => booksLoaded(books));
   }, []);
+
+  if (loading) {
+    return <Loader/>
+  }
 
   return (
     <ul className="list-group">
@@ -27,7 +32,7 @@ const BooksList = ({books, bookstoreService, booksLoaded}) => {
   );
 };
 
-const mapStateToProps = ({books}) => ({books});
+const mapStateToProps = ({books, loading}) => ({books, loading});
 const mapDispatchToProps = {booksLoaded};
 
 export default compose(
