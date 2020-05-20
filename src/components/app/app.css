@@ -3,5 +3,7 @@
 }
 
 .app__order {
+  position: sticky;
+  bottom: 0;
   margin: 24px;
 }

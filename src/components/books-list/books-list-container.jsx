@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
 import withBookStoreService from '../hoc/withBookstoreService';
-import {fetchBooks} from '../../actions';
+import {fetchBooks, bookAddedToCart} from '../../actions';
 
 import Loader from '../loader';
 import ErrorIndicator from '../error-indicator';
@@ -15,7 +15,8 @@ const BooksListContainer = (props) => {
     books,
     loading,
     error,
-    fetchBooks
+    fetchBooks,
+    onAddedToCart
   } = props;
 
   useEffect(() => {
@@ -30,13 +31,15 @@ const BooksListContainer = (props) => {
     return <ErrorIndicator/>;
   }
 
-  return <BooksList books={books}/>
+  return <BooksList books={books} onAddedToCart={onAddedToCart}/>
 };
 
-const mapStateToProps = ({books, loading, error}) => ({books, loading, error});
+const mapStateToProps = ({books, loading, error, onAddedToCart}) => ({books, loading, error, onAddedToCart});
+
 const mapDispatchToProps = (dispatch, {bookstoreService}) => {
   return {
-    fetchBooks: fetchBooks(bookstoreService, dispatch)
+    fetchBooks: fetchBooks(bookstoreService, dispatch),
+    onAddedToCart: (id) => dispatch(bookAddedToCart(id))
   }
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import './books-list-item.css';
 
-const BooksListItem = ({book}) => {
+const BooksListItem = ({book, onAddedToCart}) => {
   const {title, author, image, price} = book;
   return (
     <li className="list-group-item books-list-item">
@@ -19,8 +19,8 @@ const BooksListItem = ({book}) => {
             <h3>{title}</h3>
             <p>{author}</p>
             <div className="books-list-item__footer">
-              <p>{price}</p>
-              <button className="btn btn-primary">Add to cart</button>
+              <p>{price} RUB</p>
+              <button onClick={onAddedToCart} className="btn btn-primary">Add to cart</button>
             </div>
           </section>
         </div>

@@ -1,10 +1,20 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import Controls from './controls';
 
 import './cart-table.css';
 
-const CartTable = ({extClass}) => {
+const CartTable = (props) => {
+  const {
+    extClass,
+    items,
+    total,
+    onIncrease,
+    onDecrease,
+    onDelete
+  } = props;
+
   return (
     <div className={`cart-table ${extClass}`}>
       <div className="table-responsive">
@@ -19,21 +29,45 @@ const CartTable = ({extClass}) => {
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Idiot</td>
-            <td>1</td>
-            <td>200 rub</td>
-            <td className="cart-table__actions">
-              <Controls/>
-            </td>
-          </tr>
+          {
+            items.map((item, i) => {
+              const {id, title, amount, totalPrice} = item;
+              const listeners = {
+                onIncrease: () => {onIncrease(id)},
+                onDecrease: () => {onDecrease(id)},
+                onDelete: () => {onDelete(id)}
+              };
+
+              return (
+                <tr key={id}>
+                  <th scope="row">{ i + 1 }</th>
+                  <td>{title}</td>
+                  <td>{amount}</td>
+                  <td>{totalPrice} RUB</td>
+                  <td className="cart-table__actions">
+                    <Controls listeners={listeners} id={id}/>
+                  </td>
+                </tr>
+              )
+            })
+          }
           </tbody>
         </table>
       </div>
-      <p className="cart-table__total">Total: 200 RUB</p>
+      <p className="cart-table__total">Total: {total} RUB</p>
     </div>
   );
 };
 
-export default CartTable;
+const mapStateToProps = ({cartItems, orderTotal}) => ({
+  items: cartItems,
+  total: orderTotal
+});
+
+const mapDispatchToProps = () => ({
+  onIncrease: (id) => {
+    console.log('inc', id)
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartTable);
